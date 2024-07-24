@@ -44,12 +44,12 @@
     "erb": "html"
   },
   "[ruby]": {
-    "editor.defaultFormatter": "mbessey.vscode-rufo",
-    "editor.formatOnSave": false
+    "editor.defaultFormatter": "jnbt.vscode-rufo",
+    "editor.formatOnSave": true
   },
   "[erb]": {
     "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": true,
     "editor.autoClosingBrackets": "beforeWhitespace"
   },
   "files.associations": {
