@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rails Template</title>
+    <title>RentPilot</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <%= render 'shared/cdn_assets' %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <% if notice.present? %>
+        <%= render "shared/flash", message: notice, css_class: "success" %>
+      <% end %>
+
+      <% if alert.present? %>
+        <%= render 'shared/flash', message: alert,css_class:"danger" %>
+      <% end %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>
