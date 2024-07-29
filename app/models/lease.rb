@@ -12,4 +12,12 @@
 #  unit_id     :integer
 #
 class Lease < ApplicationRecord
+  validates :rent_amount, presence: true, numericality: { greater_than: 0 }
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+  validates :tenant_id, presence: true
+  validates :unit_id, presence: true
+
+  belongs_to :tenant, class_name: "User"
+  belongs_to :unit
 end

@@ -13,4 +13,14 @@
 #  unit_id    :integer
 #
 class Payment < ApplicationRecord
+  validates :amount, presence: true, numericality: { greater_than: 0 }
+  validates :status, presence: true, inclusion: { in: %w[pending paid overdue] }
+  validates :due_date, presence: true
+  validates :tenant_id, presence: true
+  validates :unit_id, presence: true
+
+  belongs_to :tenant, class_name: "User"
+  belongs_to :unit
+
+  has_one :property, through: :unit, source: :property
 end
