@@ -1,5 +1,5 @@
 class PropertiesController < ApplicationController
-  before_action :set_property, only: %i[ show edit update destroy ]
+  before_action :set_property, only: %i[ show edit update destroy units ]
 
   # GET /properties or /properties.json
   def index
@@ -57,14 +57,19 @@ class PropertiesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_property
-      @property = Property.find(params[:id])
-    end
+  def units
+    @units = @property.units
+  end
 
-    # Only allow a list of trusted parameters through.
-    def property_params
-      params.require(:property).permit(:name, :address, :landlord_id)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_property
+    @property = Property.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def property_params
+    params.require(:property).permit(:name, :address, :landlord_id)
+  end
 end

@@ -1,0 +1,27 @@
+<h1><%= current_user.landlord? ? @tenant.name : "Welcome, #{@tenant.name}!" %></h1>
+<br>
+<% if @unit %>
+  <p>Unit: <%= @unit.unit_number %></p>
+  <% if current_user.landlord? %>
+    <p>Property: <%= @property.name %></p>
+  <% end %>
+  <p>Address: <%= @property.address %></p>
+
+  <h2>Payments:</h2>
+  <ul>
+    <% @payments.each do |payment| %>
+      <li>
+        Amount: <%= payment.amount %>, Due Date: <%= payment.due_date %>, Status: <%= payment.status %>
+        <%= link_to 'Pay Now', edit_payment_path(payment) if payment.status == 'pending' %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You are not assigned to any unit.</p>
+<% end %>
+
+<% if current_user.landlord? %>
+  <div class="back-button">
+    <%= link_to 'Back to Units', units_property_path(@property), class: 'btn btn-primary' %>
+  </div>
+<% end %>
