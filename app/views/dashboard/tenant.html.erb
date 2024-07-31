@@ -1,8 +1,10 @@
-<h1>Tenant Dashboard</h1>
-<p>Welcome, <%= @tenant.name %></p>
+<h1><%= current_user.landlord? ? @tenant.name : "Welcome, #{@tenant.name}!" %></h1>
+<br>
 <% if @unit %>
   <p>Unit: <%= @unit.unit_number %></p>
-  <p>Property: <%= @property.name %></p>
+  <% if current_user.landlord? %>
+    <p>Property: <%= @property.name %></p>
+  <% end %>
   <p>Address: <%= @property.address %></p>
 
   <h2>Payments:</h2>
