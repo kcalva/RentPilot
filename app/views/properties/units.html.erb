@@ -1,19 +1,18 @@
 <h1>Units for <%= @property.name %></h1>
 <p>Address: <%= @property.address %> </p>
 <br>
-<h2>Tenants:</h2>
 <% @units.each do |unit| %>
   <div class="unit">
-    <% if unit.tenant %>
-      <h3>
-        <%= link_to unit.tenant.name, tenant_path(unit.tenant) %>
-      </h3>
-    <% else %>
-      <h3>Tenant: Not assigned</h3>
-    <% end %>
-    <p>
+    <h2>
       Unit <%= unit.unit_number %>
-    </p>
+    </h2>
+    <% if unit.tenant %>
+      <p>
+        Tenant: <%= link_to unit.tenant.name, tenant_path(unit.tenant) %>
+      </p>
+    <% else %>
+      <p>Tenant: Not assigned</p>
+    <% end %>
   </div>
 <% end %>
 
