@@ -1,0 +1,19 @@
+<h1>Tenant Dashboard</h1>
+<p>Welcome, <%= @tenant.name %></p>
+<% if @unit %>
+  <p>Unit: <%= @unit.unit_number %></p>
+  <p>Property: <%= @property.name %></p>
+  <p>Address: <%= @property.address %></p>
+
+  <h2>Payments:</h2>
+  <ul>
+    <% @payments.each do |payment| %>
+      <li>
+        Amount: <%= payment.amount %>, Due Date: <%= payment.due_date %>, Status: <%= payment.status %>
+        <%= link_to 'Pay Now', edit_payment_path(payment) if payment.status == 'pending' %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You are not assigned to any unit.</p>
+<% end %>

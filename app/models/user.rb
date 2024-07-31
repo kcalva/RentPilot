@@ -35,4 +35,12 @@ class User < ApplicationRecord
   has_many :owned_properties, class_name: "Property", foreign_key: "landlord_id", dependent: :destroy
 
   has_many :rented_properties, through: :units, source: :property
+
+  def landlord?
+    role == "landlord"
+  end
+
+  def tenant?
+    role == "tenant"
+  end
 end

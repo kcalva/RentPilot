@@ -1,0 +1,12 @@
+<h1>Landlord Dashboard</h1>
+<h2>Properties:</h2>
+<% @properties.each do |property| %>
+  <div class="property">
+    <h3>
+      <%= link_to property.name, units_property_path(property) %>
+    </h3>
+    <p>
+      <%= property.address %>
+    </p>
+  </div>
+<% end %>
