@@ -1,10 +1,10 @@
 <h1>Units for <%= @property.name %></h1>
-<p>Address:<%= @property.address %> </p>
+<p>Address: <%= @property.address %> </p>
 <br>
 <h2>Tenants:</h2>
 <% @units.each do |unit| %>
   <div class="unit">
-    <% if unit.tenant  %>
+    <% if unit.tenant %>
       <h3>
         <%= link_to unit.tenant.name, tenant_path(unit.tenant) %>
       </h3>
@@ -16,3 +16,7 @@
     </p>
   </div>
 <% end %>
+
+<div class="back-button">
+  <%= link_to 'Back to Properties', root_path, class: 'btn btn-primary' %>
+</div>

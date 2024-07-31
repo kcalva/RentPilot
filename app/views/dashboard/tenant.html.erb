@@ -17,3 +17,9 @@
 <% else %>
   <p>You are not assigned to any unit.</p>
 <% end %>
+
+<% if current_user.landlord? %>
+  <div class="back-button">
+    <%= link_to 'Back to Units', units_property_path(@property), class: 'btn btn-primary' %>
+  </div>
+<% end %>
