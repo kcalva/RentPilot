@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "dashboard#index"
+  root to: "landing_page#home"
 
   resources :messages
   resources :leases
@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     get "units", on: :member, to: "properties#units"
   end
 
+  get "dashboard", to: "dashboard#index", as: "dashboard_index"
   get "tenant/:id", to: "dashboard#tenant", as: "tenant"
 end
