@@ -3,7 +3,12 @@ class PaymentsController < ApplicationController
 
   # GET /payments or /payments.json
   def index
-    @payments = Payment.all
+    if params[:tenant_id]
+      @tenant = User.find(params[:tenant_id])
+      @payments = @tenant.payments
+    else
+      @payments = Payment.all
+    end
   end
 
   # GET /payments/1 or /payments/1.json
@@ -58,13 +63,14 @@ class PaymentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_payment
-      @payment = Payment.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def payment_params
-      params.require(:payment).permit(:unit_id, :tenant_id, :amount, :due_date, :paid_at, :status)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_payment
+    @payment = Payment.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def payment_params
+    params.require(:payment).permit(:unit_id, :tenant_id, :amount, :due_date, :paid_at, :status)
+  end
 end

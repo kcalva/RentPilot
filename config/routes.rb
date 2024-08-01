@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   resources :messages
   resources :leases
-  resources :payments
+  resources :payments do
+    collection do
+      get "tenant/:tenant_id", to: "payments#index", as: "tenant"
+    end
+  end
   resources :units
   resources :properties do
     get "units", on: :member, to: "properties#units"

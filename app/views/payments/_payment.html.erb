@@ -1,15 +1,5 @@
 <div id="<%= dom_id payment %>">
   <p>
-    <strong>Unit:</strong>
-    <%= payment.unit_id %>
-  </p>
-
-  <p>
-    <strong>Tenant:</strong>
-    <%= payment.tenant_id %>
-  </p>
-
-  <p>
     <strong>Amount:</strong>
     <%= payment.amount %>
   </p>
@@ -27,6 +17,6 @@
   <p>
     <strong>Status:</strong>
     <%= payment.status %>
+    <%= link_to 'Pay Now', edit_payment_path(payment) if payment.status == 'pending' %>
   </p>
-
 </div>
