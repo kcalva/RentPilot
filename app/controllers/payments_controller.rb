@@ -6,6 +6,9 @@ class PaymentsController < ApplicationController
     if params[:tenant_id]
       @tenant = User.find(params[:tenant_id])
       @payments = @tenant.payments
+      @overdue_payments = @payments.where(status: "overdue").order(due_date: :desc)
+      @pending_payments = @payments.where(status: "pending").order(due_date: :desc)
+      @paid_payments = @payments.where(status: "paid").order(due_date: :desc)
     else
       @payments = Payment.all
     end

@@ -1,22 +1,9 @@
-<div id="<%= dom_id payment %>">
-  <p>
-    <strong>Amount:</strong>
-    <%= payment.amount %>
-  </p>
-
-  <p>
-    <strong>Due date:</strong>
-    <%= payment.due_date %>
-  </p>
-
-  <p>
-    <strong>Paid at:</strong>
-    <%= payment.paid_at %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= payment.status %>
-    <%= link_to 'Pay Now', edit_payment_path(payment) if payment.status == 'pending' %>
-  </p>
+<div class="list-group-item list-group-item-action">
+  <h5 class="mb-1">Amount: <%= number_to_currency(payment.amount) %></h5>
+  <p class="mb-1">Due date: <%= payment.due_date.strftime("%B %d, %Y") %></p>
+  <p class="mb-1">Paid at: <%= payment.paid_at ? payment.paid_at.strftime("%B %d, %Y") : 'Not paid yet' %></p>
+  <p class="mb-1">Status: <span class="badge <%= payment_status_class(payment.status) %>"><%= payment.status.capitalize %></span></p>
+  <% if payment.status == 'pending' %>
+    <%= link_to 'Pay Now', edit_payment_path(payment), class: 'btn btn-primary btn-sm' %>
+  <% end %>
 </div>
