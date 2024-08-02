@@ -1,9 +1,12 @@
 <div class="list-group-item list-group-item-action">
   <h5 class="mb-1">Amount: <%= number_to_currency(payment.amount) %></h5>
   <p class="mb-1">Due date: <%= payment.due_date.strftime("%B %d, %Y") %></p>
-  <p class="mb-1">Paid at: <%= payment.paid_at ? payment.paid_at.strftime("%B %d, %Y") : 'Not paid yet' %></p>
   <p class="mb-1">Status: <span class="badge <%= payment_status_class(payment.status) %>"><%= payment.status.capitalize %></span></p>
-  <% if payment.status == 'pending' %>
-    <%= link_to 'Pay Now', edit_payment_path(payment), class: 'btn btn-primary btn-sm' %>
-  <% end %>
+  <p class="mb-1">Paid at: <%= payment.paid_at ? payment.paid_at.strftime("%B %d, %Y") : 'Not paid yet' %></p>
+
+  <!--this will be added for future feature-->
+
+  <%# if payment.status == 'pending' %>
+  <%#= link_to 'Pay Now', edit_payment_path(payment), class: 'btn btn-primary btn-sm' %>
+  <%# end %>
 </div>

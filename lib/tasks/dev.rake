@@ -85,13 +85,14 @@ task({ :sample_data => :environment }) do
   p "Seeding payments..."
   units.each do |unit|
     3.times do
+      status = %w[pending paid overdue].sample
       Payment.create!(
         unit: unit,
         tenant: unit.tenant,
         amount: Faker::Commerce.price(range: 500..1500),
         due_date: Faker::Date.between(from: 1.month.ago, to: Date.today),
-        paid_at: Faker::Date.between(from: 1.month.ago, to: Date.today),
-        status: %w[pending paid overdue].sample,
+        paid_at: status == "paid" ? Faker::Date.between(from: 1.month.ago, to: Date.today) : nil,
+        status: status,
       )
     end
   end
