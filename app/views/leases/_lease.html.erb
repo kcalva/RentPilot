@@ -1,12 +1,7 @@
 <div id="<%= dom_id lease %>">
   <p>
     <strong>Unit:</strong>
-    <%= lease.unit_id %>
-  </p>
-
-  <p>
-    <strong>Tenant:</strong>
-    <%= lease.tenant_id %>
+    <%= lease.unit.unit_number %>
   </p>
 
   <p>
@@ -24,4 +19,16 @@
     <%= lease.rent_amount %>
   </p>
 
+  <p>
+    <strong>Security deposit:</strong>
+    <%= lease.security_deposit %>
+  </p>
+
+  <div class="pdf-link">
+    <% if lease.pdf.attached? %>
+      <%= link_to 'View Lease PDF', rails_blob_path(lease.pdf, disposition: "attachment"), target: "_blank", class: 'btn btn-info' %>
+    <% else %>
+      <p>No PDF uploaded.</p>
+    <% end %>
+  </div>
 </div>

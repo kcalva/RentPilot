@@ -3,7 +3,9 @@ class LeasesController < ApplicationController
 
   # GET /leases or /leases.json
   def index
-    @leases = Lease.all
+    @tenant = User.find(params[:tenant_id])
+    @current_lease = @tenant.leases.where("start_date <= ? AND end_date >= ?", Date.today, Date.today).first
+    @past_leases = @tenant.leases.where("end_date < ?", Date.today)
   end
 
   # GET /leases/1 or /leases/1.json
@@ -40,9 +42,11 @@ class LeasesController < ApplicationController
       if @lease.update(lease_params)
         format.html { redirect_to lease_url(@lease), notice: "Lease was successfully updated." }
         format.json { render :show, status: :ok, location: @lease }
+        format.js
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @lease.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -58,13 +62,14 @@ class LeasesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_lease
-      @lease = Lease.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def lease_params
-      params.require(:lease).permit(:unit_id, :tenant_id, :start_date, :end_date, :rent_amount)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_lease
+    @lease = Lease.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def lease_params
+    params.require(:lease).permit(:unit_id, :tenant_id, :start_date, :end_date, :rent_amount, :security_deposit, :pdf)
+  end
 end

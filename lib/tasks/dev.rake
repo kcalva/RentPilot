@@ -73,22 +73,37 @@ task({ :sample_data => :environment }) do
 
   p "Seeding leases..."
   units.each do |unit|
+    # Create one current lease
     Lease.create!(
       unit: unit,
       tenant: unit.tenant,
-      start_date: Faker::Date.backward(days: 365),
-      end_date: Faker::Date.forward(days: 365),
+      start_date: Faker::Date.backward(days: 60),
+      end_date: Faker::Date.forward(days: 300),
       rent_amount: Faker::Commerce.price(range: 500..1500),
+      security_deposit: Faker::Commerce.price(range: 500..1500),
     )
+
+    # Create past leases
+    2.times do
+      Lease.create!(
+        unit: unit,
+        tenant: unit.tenant,
+        start_date: Faker::Date.backward(days: 365),
+        end_date: Faker::Date.backward(days: 60),
+        rent_amount: Faker::Commerce.price(range: 500..1500),
+        security_deposit: Faker::Commerce.price(range: 500..1500),
+      )
+    end
   end
 
   p "Seeding payments..."
-  units.each do |unit|
+  leases = Lease.all
+  leases.each do |lease|
     3.times do
       status = %w[pending paid overdue].sample
       Payment.create!(
-        unit: unit,
-        tenant: unit.tenant,
+        unit: lease.unit,
+        tenant: lease.tenant,
         amount: Faker::Commerce.price(range: 500..1500),
         due_date: Faker::Date.between(from: 1.month.ago, to: Date.today),
         paid_at: status == "paid" ? Faker::Date.between(from: 1.month.ago, to: Date.today) : nil,
@@ -97,7 +112,7 @@ task({ :sample_data => :environment }) do
     end
   end
 
-  puts "Seeding messages..."
+  p "Seeding messages..."
   50.times do
     Message.create!(
       sender: tenants.sample,

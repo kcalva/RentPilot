@@ -16,4 +16,8 @@ Rails.application.routes.draw do
 
   get "dashboard", to: "dashboard#index", as: "dashboard_index"
   get "tenant/:id", to: "dashboard#tenant", as: "tenant"
+
+  resources :tenants, only: [] do
+    resources :leases, only: [:index]
+  end
 end
