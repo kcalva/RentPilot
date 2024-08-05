@@ -24,6 +24,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  before_validation :set_default_role, on: :create
+
   validates :role, inclusion: { in: %w[landlord tenant] }
   validates :name, presence: true
 
@@ -42,5 +44,11 @@ class User < ApplicationRecord
 
   def tenant?
     role == "tenant"
+  end
+
+  private
+
+  def set_default_role
+    self.role ||= "tenant"
   end
 end
