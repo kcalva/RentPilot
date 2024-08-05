@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+ .required abbr[title="required"] {
+  display: none;
+}
+
+.password-hint {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 0.9em;
+  color: #666;
+}
