@@ -1,0 +1,11 @@
+<% if @lease.errors.any? %>
+  alert("Error updating lease: <%= j @lease.errors.full_messages.join(', ') %>");
+<% else %>
+  <% if @lease.pdf.attached? %>
+    $("#lease-<%= @lease.id %> .pdf-link").html('<%= j link_to 'View Lease PDF', rails_blob_path(@lease.pdf, disposition: "attachment"), target: "_blank", class: 'btn btn-info' %>');
+  <% else %>
+    $("#lease-<%= @lease.id %> .pdf-link").html('
+    <p>No PDF uploaded.</p>
+    ');
+  <% end %>
+<% end %>
