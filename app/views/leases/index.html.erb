@@ -2,11 +2,10 @@
 
 <div class="container mt-4">
   <div class="row justify-content-center">
-    <!-- Current Lease Column -->
     <div class="<%= current_user.landlord? ? 'col-md-6' : 'col-md-8 text-center' %>">
       <h2>Current Lease</h2>
       <% if @current_lease %>
-        <div class="card mb-4 mx-auto" style="max-width: 500px;">
+        <div class="card mb-4 mx-auto" style="max-width: 500px;" id="lease-<%= @current_lease.id %>">
           <div class="card-body">
             <%= render 'lease', lease: @current_lease %>
 
@@ -33,10 +32,11 @@
           <div class="row">
             <% lease_pair.each do |lease| %>
               <div class="col-md-6">
-                <div class="card mb-4">
+                <div class="card mb-4" id="lease-<%= lease.id %>">
                   <div class="card-body">
                     <%= render 'lease', lease: lease %>
-                    <%= form_with(model: @current_lease, local: false, html: { multipart: true }) do |form| %>
+
+                    <%= form_with(model: lease, local: false, html: { multipart: true }) do |form| %>
                       <div class="form-group">
                         <%= form.label :pdf, "Upload Lease PDF" %>
                         <%= form.file_field :pdf, class: "form-control" %>

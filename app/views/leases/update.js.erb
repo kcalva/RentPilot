@@ -1,11 +1,10 @@
 <% if @lease.errors.any? %>
   alert("Error updating lease: <%= j @lease.errors.full_messages.join(', ') %>");
 <% else %>
-  // Update the current lease card with the new PDF link
   <% if @lease.pdf.attached? %>
-    $("#lease-<%= @lease.id %>").find('.pdf-link').html('<%= link_to 'View Lease PDF', rails_blob_path(@lease.pdf,disposition: "attachment"), target: "_blank", class: 'btn btn-info' %>');
+    $("#lease-<%= @lease.id %> .pdf-link").html('<%= j link_to 'View Lease PDF', rails_blob_path(@lease.pdf, disposition: "attachment"), target: "_blank", class: 'btn btn-info' %>');
   <% else %>
-    $("#lease-<%= @lease.id %>").find('.pdf-link').html('
+    $("#lease-<%= @lease.id %> .pdf-link").html('
     <p>No PDF uploaded.</p>
     ');
   <% end %>
