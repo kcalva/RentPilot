@@ -2,7 +2,7 @@
 #
 # Table name: payments
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  amount     :decimal(, )
 #  due_date   :date
 #  paid_at    :datetime

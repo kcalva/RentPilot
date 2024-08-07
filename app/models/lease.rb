@@ -2,7 +2,7 @@
 #
 # Table name: leases
 #
-#  id               :integer          not null, primary key
+#  id               :bigint           not null, primary key
 #  end_date         :date
 #  rent_amount      :decimal(, )
 #  security_deposit :decimal(, )
