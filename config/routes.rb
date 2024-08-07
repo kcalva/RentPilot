@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount GoodJob::Engine => "good_job"
+
   devise_for :users, controllers: { registrations: "registrations" }
   root to: "landing_page#home"
 

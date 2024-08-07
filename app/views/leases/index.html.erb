@@ -8,7 +8,9 @@
         <div class="card mb-4 mx-auto" style="max-width: 500px;" id="lease-<%= @current_lease.id %>">
           <div class="card-body">
             <%= render 'lease', lease: @current_lease %>
-            <%= render 'form', lease: @current_lease %>
+            <% if current_user.landlord? %>
+              <%= render 'form', lease: @current_lease %>
+            <% end %>
           </div>
         </div>
       <% else %>
