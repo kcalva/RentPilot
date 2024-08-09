@@ -12,19 +12,16 @@
   <% end %>
 
   <div>
-    <%= form.label :property_id, style: "display: block" %>
-    <%= form.number_field :property_id %>
-  </div>
-
-  <div>
     <%= form.label :unit_number, style: "display: block" %>
     <%= form.text_field :unit_number %>
   </div>
 
   <div>
     <%= form.label :tenant_id, style: "display: block" %>
-    <%= form.number_field :tenant_id %>
+    <%= form.select :tenant_id, options_from_collection_for_select(User.where(role: 'tenant'), :id, :name), include_blank: true %>
   </div>
+
+  <%= form.hidden_field :property_id %>
 
   <div>
     <%= form.submit %>

@@ -59,20 +59,20 @@ task({ :sample_data => :environment }) do
   properties = Property.all
 
   p "Seeding units..."
-  properties.each do |property|
-    5.times do
-      Unit.create!(
-        property: property,
-        unit_number: Faker::Number.number(digits: 4),
-        tenant: tenants.sample,
-      )
-    end
+  tenants.each do |tenant|
+    property = properties.sample
+    Unit.create!(
+      property: property,
+      unit_number: Faker::Number.number(digits: 4),
+      tenant: tenant,
+    )
   end
 
   units = Unit.all
 
   p "Seeding leases..."
-  units.each do |unit|
+  tenants.each do |tenant|
+    unit = Unit.find_by(tenant: tenant)
     # Create one current lease
     Lease.create!(
       unit: unit,
