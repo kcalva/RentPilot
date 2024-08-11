@@ -2,7 +2,7 @@
 <% @properties.each do |property| %>
   <div class="property card my-3 p-3">
     <h2>
-      <%= link_to property.name, units_property_path(property), class: "text-primary" %>
+      <%= link_to property.name, property_units_path(property), class: "text-primary" %>
     </h2>
     <p>
       <%= property.address %>

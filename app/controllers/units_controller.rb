@@ -1,36 +1,33 @@
 class UnitsController < ApplicationController
-  before_action :set_unit, only: %i[ show edit update destroy ]
+  before_action :set_unit, only: %i[ edit update destroy ]
 
   # GET /units or /units.json
   def index
-    @units = Unit.all
-  end
-
-  # GET /units/1 or /units/1.json
-  def show
+    @property = Property.find(params[:property_id])
+    @units = @property.units
   end
 
   # GET /units/new
   def new
     @property = Property.find(params[:property_id])
-    @unit = Unit.new(property_id: @property.id)
+    @unit = @property.units.new
   end
 
   # GET /units/1/edit
   def edit
+    @property = Property.find(params[:property_id])
+    @unit = @property.units.find(params[:id])
   end
 
   # POST /units or /units.json
   def create
-    @property = Property.find(params[:unit][:property_id])
+    @property = Property.find(params[:property_id])
     @unit = @property.units.new(unit_params)
     respond_to do |format|
       if @unit.save
-        format.html { redirect_to units_property_path(@property), notice: "Unit was successfully created." }
-        format.json { render :show, status: :created, location: @unit }
+        format.html { redirect_to property_units_path(@property), notice: "Unit was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @unit.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -40,11 +37,9 @@ class UnitsController < ApplicationController
     @property = @unit.property
     respond_to do |format|
       if @unit.update(unit_params)
-        format.html { redirect_to units_property_path(@property), notice: "Unit was successfully updated." }
-        format.json { render :show, status: :ok, location: @unit }
+        format.html { redirect_to property_units_path(@property), notice: "Unit was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @unit.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,8 +50,7 @@ class UnitsController < ApplicationController
     @unit.destroy!
 
     respond_to do |format|
-      format.html { redirect_to units_property_path(@property), notice: "Unit was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to property_units_path(@property), notice: "Unit was successfully destroyed." }
     end
   end
 

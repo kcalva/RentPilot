@@ -20,6 +20,6 @@
 
 <% if current_user.landlord? %>
   <div class="back-button">
-    <%= link_to 'Back to Units', units_property_path(@property), class: 'btn btn-primary' %>
+    <%= link_to 'Back to Units', property_units_path(@property), class: 'btn btn-primary' %>
   </div>
 <% end %>

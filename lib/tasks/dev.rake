@@ -68,8 +68,6 @@ task({ :sample_data => :environment }) do
     )
   end
 
-  units = Unit.all
-
   p "Seeding leases..."
   tenants.each do |tenant|
     unit = Unit.find_by(tenant: tenant)

@@ -1,14 +1,31 @@
-<p style="color: green"><%= notice %></p>
+<h1>Units for <%= @property.name %></h1>
+<p>Address: <%= @property.address %> </p>
+<br>
+<% @units.each do |unit| %>
+  <div class="unit card my-3 p-3">
+    <h2>
+      Unit <%= unit.unit_number %>
+    </h2>
+    <% if unit.tenant %>
+      <p>
+        Tenant: <%= link_to unit.tenant.name, tenant_path(unit.tenant), class: "text-primary" %>
+      </p>
+    <% else %>
+      <p>Tenant: Not assigned</p>
+    <% end %>
 
-<h1>Units</h1>
+    <div class="unit-actions d-flex justify-content-between mt-3">
+      <%= link_to edit_property_unit_path(@property, unit), class: "btn btn-warning" do %>
+        <i class="fas fa-edit"></i> Edit
+      <% end %>
+      <%= link_to property_unit_path(@property, unit), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" do %>
+        <i class="fas fa-trash"></i> Delete
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
-<div id="units">
-  <% @units.each do |unit| %>
-    <%= render unit %>
-    <p>
-      <%= link_to "Show this unit", unit %>
-    </p>
-  <% end %>
+<div class="back-button mt-4">
+  <%= link_to 'Back to Properties', properties_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Add New Unit', new_property_unit_path(@property), class: 'btn btn-primary' %>
 </div>
-
-<%= link_to "New unit", new_unit_path %>

@@ -1,9 +1,9 @@
 <h1>Editing unit</h1>
 
-<%= render "form", unit: @unit %>
+<%= render "form", property: @property, unit: @unit %>
 
 <br>
 
 <div>
-  <%= link_to "Back to units", units_property_path(@unit.property) %>
+  <%= link_to "Back to Units", property_units_path(@property), class: "btn btn-secondary" %>
 </div>
