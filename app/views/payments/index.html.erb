@@ -8,44 +8,9 @@
     <% end %>
   </div>
   <div class="row">
-    <div class="col-md-4">
-      <h2 class="h4">Overdue Payments</h2>
-      <% if @overdue_payments.any? %>
-        <div class="list-group">
-          <% @overdue_payments.each do |payment| %>
-            <%= render 'payment', payment: payment %>
-          <% end %>
-        </div>
-      <% else %>
-        <div class="alert alert-info">No overdue payments.</div>
-      <% end %>
-    </div>
-
-    <div class="col-md-4">
-      <h2 class="h4">Pending Payments</h2>
-      <% if @pending_payments.any? %>
-        <div class="list-group">
-          <% @pending_payments.each do |payment| %>
-            <%= render 'payment', payment: payment %>
-          <% end %>
-        </div>
-      <% else %>
-        <div class="alert alert-info">No pending payments.</div>
-      <% end %>
-    </div>
-
-    <div class="col-md-4">
-      <h2 class="h4">Paid Payments</h2>
-      <% if @paid_payments.any? %>
-        <div class="list-group">
-          <% @paid_payments.each do |payment| %>
-            <%= render 'payment', payment: payment %>
-          <% end %>
-        </div>
-      <% else %>
-        <div class="alert alert-info">No paid payments.</div>
-      <% end %>
-    </div>
+    <% { 'Overdue Payments' => @overdue_payments, 'Pending Payments' => @pending_payments, 'Paid Payments' => @paid_payments }.each do |title, payments| %>
+      <%= render 'payment_list',  title: title, payments: payments  %>
+    <% end %>
   </div>
 
   <div class="mt-4">

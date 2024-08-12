@@ -1,25 +1,34 @@
-<h1><%= current_user.landlord? ? @tenant.name : "Welcome, #{@tenant.name}!" %></h1>
-<br>
-<% if @unit %>
-  <p>Unit: <%= @unit.unit_number %></p>
-  <% if current_user.landlord? %>
-    <p>Property: <%= @property.name %></p>
-  <% end %>
-  <p>Address: <%= @property.address %></p>
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h1 class="card-title">
+        <%= current_user.landlord? ? @tenant.name : "Welcome, #{@tenant.name}!" %>
+      </h1>
 
-  <div class="payments-button" style="margin-bottom: 20px">
-    <%= link_to 'View Payments', user_payments_path(@tenant), class: 'btn btn-primary' %>
-  </div>
+      <% if @unit %>
+        <div class="mb-3">
+          <p><strong>Unit:</strong> <%= @unit.unit_number %></p>
+          <% if current_user.landlord? %>
+            <p><strong>Property:</strong> <%= @property.name %></p>
+          <% end %>
+          <p><strong>Address:</strong> <%= @property.address %></p>
+        </div>
 
-  <div class="leases-button" style="margin-bottom: 20px">
-    <%= link_to 'View Leases', user_leases_path(@tenant), class: 'btn btn-secondary' %>
-  </div>
-<% else %>
-  <p>You are not assigned to any unit.</p>
-<% end %>
+        <div class="d-flex justify-content-start mb-3">
+          <%= link_to 'View Payments', user_payments_path(@tenant), class: 'btn btn-primary mr-2' %>
+          <%= link_to 'View Leases', user_leases_path(@tenant), class: 'btn btn-secondary' %>
+        </div>
+      <% else %>
+        <div class="alert alert-warning">
+          <p>You are not assigned to any unit.</p>
+        </div>
+      <% end %>
 
-<% if current_user.landlord? %>
-  <div class="back-button">
-    <%= link_to 'Back to Units', property_units_path(@property), class: 'btn btn-primary' %>
+      <% if current_user.landlord? %>
+        <div class="d-flex justify-content-end mt-4">
+          <%= link_to 'Back to Units', property_units_path(@property), class: 'btn btn-outline-primary' %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>
