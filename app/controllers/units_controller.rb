@@ -1,27 +1,23 @@
 class UnitsController < ApplicationController
+  before_action :set_property
   before_action :set_unit, only: %i[ edit update destroy ]
 
-  # GET /units or /units.json
+  # GET /units
   def index
-    @property = Property.find(params[:property_id])
     @units = @property.units
   end
 
   # GET /units/new
   def new
-    @property = Property.find(params[:property_id])
     @unit = @property.units.new
   end
 
   # GET /units/1/edit
   def edit
-    @property = Property.find(params[:property_id])
-    @unit = @property.units.find(params[:id])
   end
 
-  # POST /units or /units.json
+  # POST /units
   def create
-    @property = Property.find(params[:property_id])
     @unit = @property.units.new(unit_params)
     respond_to do |format|
       if @unit.save
@@ -32,9 +28,8 @@ class UnitsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /units/1 or /units/1.json
+  # PATCH/PUT /units/1
   def update
-    @property = @unit.property
     respond_to do |format|
       if @unit.update(unit_params)
         format.html { redirect_to property_units_path(@property), notice: "Unit was successfully updated." }
@@ -44,11 +39,9 @@ class UnitsController < ApplicationController
     end
   end
 
-  # DELETE /units/1 or /units/1.json
+  # DELETE /units/1
   def destroy
-    @property = @unit.property
     @unit.destroy!
-
     respond_to do |format|
       format.html { redirect_to property_units_path(@property), notice: "Unit was successfully destroyed." }
     end
@@ -56,13 +49,15 @@ class UnitsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_unit
-    @unit = Unit.find(params[:id])
+  def set_property
+    @property = Property.find(params[:property_id])
   end
 
-  # Only allow a list of trusted parameters through.
+  def set_unit
+    @unit = @property.units.find(params[:id])
+  end
+
   def unit_params
-    params.require(:unit).permit(:property_id, :unit_number, :tenant_id)
+    params.require(:unit).permit(:unit_number, :tenant_id)
   end
 end

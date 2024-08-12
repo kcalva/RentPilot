@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
   resources :properties, except: [:show] do
     resources :units, except: [:show]
-    # get "units", on: :member, to: "properties#units"
   end
 
   resources :tenant, only: [:show] do
@@ -13,6 +12,4 @@ Rails.application.routes.draw do
   end
 
   # resources :messages
-  # resources :leases
-  # resources :units
 end

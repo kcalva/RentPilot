@@ -1,17 +1,9 @@
-<div id="<%= dom_id property %>">
+<div id="<%= dom_id property %>" class="property card my-3 p-3">
+  <h2>
+    <%= link_to property.name, property_units_path(property), class: "text-primary" %>
+  </h2>
   <p>
-    <strong>Name:</strong>
-    <%= property.name %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
     <%= property.address %>
   </p>
-
-  <p>
-    <strong>Landlord:</strong>
-    <%= property.landlord_id %>
-  </p>
-
+  <%= render 'shared/actions', edit_path: edit_property_path(property), delete_path: property_path(property) %>
 </div>
