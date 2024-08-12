@@ -5,7 +5,7 @@
   </h2>
   <% if unit.tenant %>
     <p>
-      Tenant: <%= link_to unit.tenant.name, tenant_path(unit.tenant), class: "text-primary" %>
+      Tenant: <%= link_to unit.tenant.name, user_path(unit.tenant), class: "text-primary" %>
     </p>
   <% else %>
     <p>Tenant: Not assigned</p>

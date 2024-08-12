@@ -6,9 +6,9 @@ Rails.application.routes.draw do
     resources :units, except: [:show]
   end
 
-  resources :tenant, only: [:show] do
-    resources :leases, only: [:index]
-    resources :payments, only: [:index]
+  resources :users, only: [:show] do
+    resources :leases, except: [:show]
+    resources :payments, except: [:show]
   end
 
   # resources :messages

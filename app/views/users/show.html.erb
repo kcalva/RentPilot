@@ -8,11 +8,11 @@
   <p>Address: <%= @property.address %></p>
 
   <div class="payments-button" style="margin-bottom: 20px">
-    <%= link_to 'View Payments', tenant_payments_path(@tenant), class: 'btn btn-primary' %>
+    <%= link_to 'View Payments', user_payments_path(@tenant), class: 'btn btn-primary' %>
   </div>
 
   <div class="leases-button" style="margin-bottom: 20px">
-    <%= link_to 'View Leases', tenant_leases_path(@tenant), class: 'btn btn-secondary' %>
+    <%= link_to 'View Leases', user_leases_path(@tenant), class: 'btn btn-secondary' %>
   </div>
 <% else %>
   <p>You are not assigned to any unit.</p>

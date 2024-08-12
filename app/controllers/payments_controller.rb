@@ -1,10 +1,10 @@
 class PaymentsController < ApplicationController
-  before_action :set_payment, only: %i[ show edit update destroy ]
-
+  before_action :set_payment, only: %i[edit update destroy]
+  before_action :set_tenant_and_unit, only: %i[new create]
   # GET /payments or /payments.json
   def index
-    if params[:tenant_id]
-      @tenant = User.find(params[:tenant_id])
+    if params[:user_id]
+      @tenant = User.find(params[:user_id])
       @payments = @tenant.payments
       @overdue_payments = @payments.where(status: "overdue").order(due_date: :desc)
       @pending_payments = @payments.where(status: "pending").order(due_date: :desc)
@@ -14,66 +14,62 @@ class PaymentsController < ApplicationController
     end
   end
 
-  # GET /payments/1 or /payments/1.json
-  def show
-  end
-
   # GET /payments/new
   def new
-    @payment = Payment.new
+    @payment = @tenant.payments.new
   end
 
   # GET /payments/1/edit
   def edit
+    @payment = Payment.find(params[:id])
+    @tenant = @payment.tenant
   end
 
-  # POST /payments or /payments.json
+  # POST /payments
   def create
-    @payment = Payment.new(payment_params)
+    @payment = @tenant.payments.new(payment_params)
+    @payment.unit = @unit
 
     respond_to do |format|
       if @payment.save
-        format.html { redirect_to payment_url(@payment), notice: "Payment was successfully created." }
-        format.json { render :show, status: :created, location: @payment }
+        format.html { redirect_to tenant_payments_path(@tenant), notice: "Payment was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /payments/1 or /payments/1.json
+  # PATCH/PUT /payments/1
   def update
     respond_to do |format|
       if @payment.update(payment_params)
-        format.html { redirect_to payment_url(@payment), notice: "Payment was successfully updated." }
-        format.json { render :show, status: :ok, location: @payment }
+        format.html { redirect_to user_payments_path(@payment.tenant), notice: "Payment was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /payments/1 or /payments/1.json
+  # DELETE /payments/1
   def destroy
     @payment.destroy!
-
     respond_to do |format|
-      format.html { redirect_to payments_url, notice: "Payment was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to user_payments_path(@payment.tenant), notice: "Payment was successfully destroyed." }
     end
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_payment
     @payment = Payment.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
+  def set_tenant_and_unit
+    @tenant = User.find(params[:user_id])
+    @unit = @tenant.units.first
+  end
+
   def payment_params
-    params.require(:payment).permit(:unit_id, :tenant_id, :amount, :due_date, :paid_at, :status)
+    params.require(:payment).permit(:amount, :due_date, :paid_at, :status)
   end
 end
