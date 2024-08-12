@@ -1,6 +1,12 @@
 <h1 class="my-4">Payments for <%= @tenant.name %></h1>
 
 <div class="container">
+  <div class="mb-4">
+    <%= link_to 'Back to Tenant Dashboard', user_path(@tenant), class: 'btn btn-primary' %>
+    <% if current_user.landlord? %>
+      <%= link_to 'Add New Payment', new_user_payment_path(@tenant), class: 'btn btn-success ml-3' %>
+    <% end %>
+  </div>
   <div class="row">
     <div class="col-md-4">
       <h2 class="h4">Overdue Payments</h2>
@@ -44,6 +50,8 @@
 
   <div class="mt-4">
     <%= link_to 'Back to Tenant Dashboard', user_path(@tenant), class: 'btn btn-primary' %>
-    <%#= link_to 'Add new payment', new_user_payment_path(@payment.tenant), class: 'btn btn-success ml-3' %>
+    <% if current_user.landlord? %>
+      <%= link_to 'Add New Payment', new_user_payment_path(@tenant), class: 'btn btn-success ml-3' %>
+    <% end %>
   </div>
 </div>

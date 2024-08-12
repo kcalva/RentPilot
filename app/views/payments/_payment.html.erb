@@ -4,10 +4,8 @@
   <p class="mb-1">Status: <span class="badge <%= payment_status_class(payment.status) %>"><%= payment.status.capitalize %></span></p>
   <p class="mb-1">Paid at: <%= payment.paid_at ? payment.paid_at.strftime("%B %d, %Y") : 'Not paid yet' %></p>
 
-  <% if payment.persisted? %>
-    <%= render 'shared/actions', edit_path: edit_user_payment_path(payment.tenant, payment), delete_path: user_payments_path(payment.tenant) %>
-  <% else %>
-    <p>Payment not available for editing.</p>
+  <% if current_user.landlord? %>
+    <%= render 'shared/actions', edit_path: edit_user_payment_path(payment.tenant, payment), delete_path: user_payment_path(payment.tenant, payment) %>
   <% end %>
 
   <!-- This will be added for future feature -->

@@ -20,7 +20,7 @@
         </section>
       <% elsif current_user.tenant? %>
         <section class="call-to-action my-5">
-          <%= link_to 'Go to Dashboard', tenant_path(current_user), class: 'btn btn-primary mx-2' %>
+          <%= link_to 'Go to Dashboard', user_path(current_user), class: 'btn btn-primary mx-2' %>
         </section>
       <% end %>
     <% end %>

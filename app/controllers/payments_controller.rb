@@ -1,6 +1,7 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: %i[edit update destroy]
   before_action :set_tenant_and_unit, only: %i[new create]
+
   # GET /payments or /payments.json
   def index
     if params[:user_id]
@@ -32,7 +33,7 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
-        format.html { redirect_to tenant_payments_path(@tenant), notice: "Payment was successfully created." }
+        format.html { redirect_to user_payments_path(@payment.tenant), notice: "Payment was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
