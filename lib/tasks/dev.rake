@@ -29,7 +29,7 @@ namespace :dev do
       name: "Admin",
       email: "admin@example.com",
       password: "AdminPassword",
-      role: "Admin",
+      role: "landlord",
       admin: true,
     )
 
