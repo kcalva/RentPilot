@@ -24,6 +24,14 @@ task({ :sample_data => :environment }) do
     role: "tenant",
   )
 
+  User.create!(
+    name: "Admin",
+    email: "admin@example.com",
+    password: "AdminPassword",
+    role: "Admin",
+    admin: true,
+  )
+
   9.times do
     User.create!(
       name: Faker::Name.name,
