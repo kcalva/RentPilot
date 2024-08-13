@@ -1,25 +1,14 @@
-<%= form_with(model: payment) do |form| %>
-  <% if payment.errors.any? %>
+<%= form_with(model: [ @tenant, @payment ]) do |form| %>
+  <% if @payment.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
-
+      <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
       <ul>
-        <% payment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% @payment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :unit_id, style: "display: block" %>
-    <%= form.number_field :unit_id %>
-  </div>
-
-  <div>
-    <%= form.label :tenant_id, style: "display: block" %>
-    <%= form.number_field :tenant_id %>
-  </div>
 
   <div>
     <%= form.label :amount, style: "display: block" %>
@@ -38,10 +27,10 @@
 
   <div>
     <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+    <%= form.select :status, options_for_select([['Pending', 'pending'], ['Paid', 'paid'], ['Overdue', 'overdue']], @payment.status) %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

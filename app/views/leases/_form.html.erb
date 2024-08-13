@@ -1,7 +1,26 @@
-<%= form_with(model: lease, local: false, html: { multipart: true }) do |form| %>
+<%= form_with(model: [ @tenant, @lease ]) do |form| %>
+  <div class="form-group">
+    <%= form.label :start_date, "Start Date" %>
+    <%= form.date_field :start_date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :end_date, "End Date" %>
+    <%= form.date_field :end_date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :rent_amount, "Rent Amount" %>
+    <%= form.number_field :rent_amount, step: 0.01, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :security_deposit, "Security Deposit" %>
+    <%= form.number_field :security_deposit, step: 0.01, class: "form-control" %>
+  </div>
   <div class="form-group">
     <%= form.label :pdf, "Upload Lease PDF" %>
     <%= form.file_field :pdf, class: "form-control" %>
   </div>
-  <%= form.submit "Upload", class: "btn btn-success" %>
+  <%= form.submit "Save Lease", class: "btn btn-success" %>
 <% end %>

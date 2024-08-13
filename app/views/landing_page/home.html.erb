@@ -13,6 +13,17 @@
         <li class="mb-3"><i class="fas fa-check"></i> Automatic payment reminders</li>
       </ul>
     </section>
+    <% if user_signed_in? %>
+      <% if current_user.landlord? %>
+        <section class="call-to-action my-5">
+          <%= link_to 'Go to Dashboard', properties_path, class: 'btn btn-primary mx-2' %>
+        </section>
+      <% elsif current_user.tenant? %>
+        <section class="call-to-action my-5">
+          <%= link_to 'Go to Dashboard', user_path(current_user), class: 'btn btn-primary mx-2' %>
+        </section>
+      <% end %>
+    <% end %>
   </div>
 
   <footer class="footer text-center mt-5">

@@ -2,16 +2,14 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "registrations" }
   root to: "landing_page#home"
 
-  resources :properties do
-    get "units", on: :member, to: "properties#units"
+  resources :properties, except: [:show] do
+    resources :units, except: [:show]
   end
 
-  resources :tenant, only: [:show] do
-    resources :leases, only: [:index]
-    resources :payments, only: [:index]
+  resources :users, only: [:show] do
+    resources :leases, except: [:show]
+    resources :payments, except: [:show]
   end
 
-  resources :messages
-  resources :leases
-  resources :units
+  # resources :messages
 end

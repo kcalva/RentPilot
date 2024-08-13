@@ -1,70 +1,63 @@
 class UnitsController < ApplicationController
-  before_action :set_unit, only: %i[ show edit update destroy ]
+  before_action :set_property
+  before_action :set_unit, only: %i[ edit update destroy ]
 
-  # GET /units or /units.json
+  # GET /units
   def index
-    @units = Unit.all
-  end
-
-  # GET /units/1 or /units/1.json
-  def show
+    @units = @property.units
   end
 
   # GET /units/new
   def new
-    @unit = Unit.new
+    @unit = @property.units.new
   end
 
   # GET /units/1/edit
   def edit
   end
 
-  # POST /units or /units.json
+  # POST /units
   def create
-    @unit = Unit.new(unit_params)
-
+    @unit = @property.units.new(unit_params)
     respond_to do |format|
       if @unit.save
-        format.html { redirect_to unit_url(@unit), notice: "Unit was successfully created." }
-        format.json { render :show, status: :created, location: @unit }
+        format.html { redirect_to property_units_path(@property), notice: "Unit was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @unit.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /units/1 or /units/1.json
+  # PATCH/PUT /units/1
   def update
     respond_to do |format|
       if @unit.update(unit_params)
-        format.html { redirect_to unit_url(@unit), notice: "Unit was successfully updated." }
-        format.json { render :show, status: :ok, location: @unit }
+        format.html { redirect_to property_units_path(@property), notice: "Unit was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @unit.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /units/1 or /units/1.json
+  # DELETE /units/1
   def destroy
     @unit.destroy!
-
     respond_to do |format|
-      format.html { redirect_to units_url, notice: "Unit was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to property_units_path(@property), notice: "Unit was successfully destroyed." }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_unit
-      @unit = Unit.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def unit_params
-      params.require(:unit).permit(:property_id, :unit_number, :tenant_id)
-    end
+  def set_property
+    @property = Property.find(params[:property_id])
+  end
+
+  def set_unit
+    @unit = @property.units.find(params[:id])
+  end
+
+  def unit_params
+    params.require(:unit).permit(:unit_number, :tenant_id)
+  end
 end

@@ -6,7 +6,7 @@
           <%= image_tag 'logo.png', alt: "RentPilot", width: 130 %>
         <% end %>
       <% elsif current_user.tenant? %>
-        <%= link_to tenant_path(current_user), class: "navbar-brand" do%>
+        <%= link_to user_path(current_user), class: "navbar-brand" do%>
           <%= image_tag 'logo.png', alt: "RentPilot", width: 130 %>
         <% end %>
       <% end %>

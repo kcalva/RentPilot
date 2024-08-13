@@ -1,20 +1,15 @@
-<%= form_with(model: unit) do |form| %>
-  <% if unit.errors.any? %>
+<%= form_with(model: [@property, @unit]) do |form| %>
+  <% if @unit.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(unit.errors.count, "error") %> prohibited this unit from being saved:</h2>
+      <h2><%= pluralize(@unit.errors.count, "error") %> prohibited this unit from being saved:</h2>
 
       <ul>
-        <% unit.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% @unit.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :property_id, style: "display: block" %>
-    <%= form.number_field :property_id %>
-  </div>
 
   <div>
     <%= form.label :unit_number, style: "display: block" %>
@@ -23,10 +18,10 @@
 
   <div>
     <%= form.label :tenant_id, style: "display: block" %>
-    <%= form.number_field :tenant_id %>
+    <%= form.collection_select :tenant_id, User.where(role: 'tenant'), :id, :name, include_blank: true %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Save Unit", class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     if resource.landlord?
       properties_path
     elsif resource.tenant?
-      tenant_path(resource)
+      user_path(resource)
     else
       root_path
     end
