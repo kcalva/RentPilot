@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  admin                  :boolean          default(FALSE), not null
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  name                   :string
@@ -44,6 +45,10 @@ class User < ApplicationRecord
 
   def tenant?
     role == "tenant"
+  end
+
+  def admin?
+    admin
   end
 
   private
