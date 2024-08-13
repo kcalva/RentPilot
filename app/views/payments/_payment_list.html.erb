@@ -1,0 +1,12 @@
+<div class="col-md-4">
+  <h2 class="h4"><%= title %></h2>
+  <% if payments.any? %>
+    <div class="list-group">
+      <% payments.each do |payment| %>
+        <%= render 'payment', payment: payment %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-info">No <%= title.downcase %>.</div>
+  <% end %>
+</div>

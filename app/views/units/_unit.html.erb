@@ -1,17 +1,14 @@
-<div id="<%= dom_id unit %>">
-  <p>
-    <strong>Property:</strong>
-    <%= unit.property_id %>
-  </p>
-
-  <p>
-    <strong>Unit number:</strong>
+<div id="<%= dom_id unit %>" class="unit card my-3 p-3">
+  <h2>
+    <strong>Unit:</strong>
     <%= unit.unit_number %>
-  </p>
-
-  <p>
-    <strong>Tenant:</strong>
-    <%= unit.tenant_id %>
-  </p>
-
+  </h2>
+  <% if unit.tenant %>
+    <p>
+      Tenant: <%= link_to unit.tenant.name, user_path(unit.tenant), class: "text-primary" %>
+    </p>
+  <% else %>
+    <p>Tenant: Not assigned</p>
+  <% end %>
+  <%= render 'shared/actions', edit_path: edit_property_unit_path(@property,unit), delete_path: property_unit_path(@property,unit) %>
 </div>

@@ -5,6 +5,5 @@
 <br>
 
 <div>
-  <%= link_to "Show this lease", @lease %> |
-  <%= link_to "Back to leases", leases_path %>
+  <%= link_to "Back to leases", user_leases_path(@lease.tenant) %>
 </div>

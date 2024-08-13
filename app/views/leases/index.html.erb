@@ -9,7 +9,7 @@
           <div class="card-body">
             <%= render 'lease', lease: @current_lease %>
             <% if current_user.landlord? %>
-              <%= render 'form', lease: @current_lease %>
+              <%= render 'shared/actions', edit_path: edit_user_lease_path(@current_lease.tenant, @current_lease), delete_path: user_lease_path(@current_lease.tenant, @current_lease) %>
             <% end %>
           </div>
         </div>
@@ -30,7 +30,9 @@
                 <div class="card mb-4" id="lease-<%= lease.id %>">
                   <div class="card-body">
                     <%= render 'lease', lease: lease %>
-                    <%= render 'form', lease: lease %>
+                    <% if current_user.landlord? %>
+                      <%= render 'shared/actions', edit_path: edit_user_lease_path(lease.tenant, lease), delete_path: user_lease_path(lease.tenant, lease) %>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -44,9 +46,11 @@
   <% end %>
 
   <div class="text-center mt-4">
-    <%= link_to "New lease", new_lease_path, class: 'btn btn-success' %>
+    <% if current_user.landlord? %>
+      <%= link_to "New lease", new_user_lease_path(@tenant), class: 'btn btn-success' %>
+    <% end %>
     <div class="back-button mt-3">
-      <%= link_to 'Back to Tenant Dashboard', tenant_path(@tenant), class: 'btn btn-secondary' %>
+      <%= link_to 'Back to Tenant Dashboard', user_path(@tenant), class: 'btn btn-secondary' %>
     </div>
   </div>
 </div>

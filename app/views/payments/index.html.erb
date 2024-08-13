@@ -1,48 +1,22 @@
 <h1 class="my-4">Payments for <%= @tenant.name %></h1>
 
 <div class="container">
+  <div class="mb-4">
+    <%= link_to 'Back to Tenant Dashboard', user_path(@tenant), class: 'btn btn-primary' %>
+    <% if current_user.landlord? %>
+      <%= link_to 'Add New Payment', new_user_payment_path(@tenant), class: 'btn btn-success ml-3' %>
+    <% end %>
+  </div>
   <div class="row">
-    <div class="col-md-4">
-      <h2 class="h4">Overdue Payments</h2>
-      <% if @overdue_payments.any? %>
-        <div class="list-group">
-          <% @overdue_payments.each do |payment| %>
-            <%= render 'payment', payment: payment %>
-          <% end %>
-        </div>
-      <% else %>
-        <div class="alert alert-info">No overdue payments.</div>
-      <% end %>
-    </div>
-
-    <div class="col-md-4">
-      <h2 class="h4">Pending Payments</h2>
-      <% if @pending_payments.any? %>
-        <div class="list-group">
-          <% @pending_payments.each do |payment| %>
-            <%= render 'payment', payment: payment %>
-          <% end %>
-        </div>
-      <% else %>
-        <div class="alert alert-info">No pending payments.</div>
-      <% end %>
-    </div>
-
-    <div class="col-md-4">
-      <h2 class="h4">Paid Payments</h2>
-      <% if @paid_payments.any? %>
-        <div class="list-group">
-          <% @paid_payments.each do |payment| %>
-            <%= render 'payment', payment: payment %>
-          <% end %>
-        </div>
-      <% else %>
-        <div class="alert alert-info">No paid payments.</div>
-      <% end %>
-    </div>
+    <% { 'Overdue Payments' => @overdue_payments, 'Pending Payments' => @pending_payments, 'Paid Payments' => @paid_payments }.each do |title, payments| %>
+      <%= render 'payment_list',  title: title, payments: payments  %>
+    <% end %>
   </div>
 
   <div class="mt-4">
-    <%= link_to 'Back to Tenant Dashboard', tenant_path(@tenant), class: 'btn btn-primary' %>
+    <%= link_to 'Back to Tenant Dashboard', user_path(@tenant), class: 'btn btn-primary' %>
+    <% if current_user.landlord? %>
+      <%= link_to 'Add New Payment', new_user_payment_path(@tenant), class: 'btn btn-success ml-3' %>
+    <% end %>
   </div>
 </div>

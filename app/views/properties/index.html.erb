@@ -1,14 +1,8 @@
-<p style="color: green"><%= notice %></p>
+<h1>Properties:</h1>
+<% @properties.each do |property| %>
+  <%= render property%>
+<% end %>
 
-<h1>Properties</h1>
-
-<div id="properties">
-  <% @properties.each do |property| %>
-    <%= render property %>
-    <p>
-      <%= link_to "Show this property", property %>
-    </p>
-  <% end %>
+<div class="back-button mt-4">
+  <%= link_to 'Add new property', new_property_path, class: 'btn btn-primary' %>
 </div>
-
-<%= link_to "New property", new_property_path %>

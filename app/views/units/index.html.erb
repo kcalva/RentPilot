@@ -1,14 +1,11 @@
-<p style="color: green"><%= notice %></p>
+<h1>Units for <%= @property.name %></h1>
+<p>Address: <%= @property.address %> </p>
+<br>
+<% @units.each do |unit| %>
+  <%= render unit %>
+<% end %>
 
-<h1>Units</h1>
-
-<div id="units">
-  <% @units.each do |unit| %>
-    <%= render unit %>
-    <p>
-      <%= link_to "Show this unit", unit %>
-    </p>
-  <% end %>
+<div class="back-button mt-4">
+  <%= link_to 'Back to Properties', properties_path, class: 'btn btn-secondary' %>
+  <%= link_to 'Add New Unit', new_property_unit_path(@property), class: 'btn btn-primary' %>
 </div>
-
-<%= link_to "New unit", new_unit_path %>

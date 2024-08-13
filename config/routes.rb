@@ -1,25 +1,20 @@
 Rails.application.routes.draw do
-  mount GoodJob::Engine => "good_job"
+  authenticate :user, ->(user) { user.admin? } do
+    mount RailsAdmin::Engine, at: "admin", as: "rails_admin"
+    mount GoodJob::Engine => "good_job"
+  end
 
   devise_for :users, controllers: { registrations: "registrations" }
   root to: "landing_page#home"
 
-  resources :messages
-  resources :leases
-  resources :payments do
-    collection do
-      get "tenant/:tenant_id", to: "payments#index", as: "tenant"
-    end
-  end
-  resources :units
-  resources :properties do
-    get "units", on: :member, to: "properties#units"
+  resources :properties, except: [:show] do
+    resources :units, except: [:show]
   end
 
-  get "dashboard", to: "dashboard#index", as: "dashboard_index"
-  get "tenant/:id", to: "dashboard#tenant", as: "tenant"
-
-  resources :tenants, only: [] do
-    resources :leases, only: [:index]
+  resources :users, only: [:show] do
+    resources :leases, except: [:show]
+    resources :payments, except: [:show]
   end
+
+  # resources :messages
 end
