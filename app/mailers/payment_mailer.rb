@@ -1,5 +1,5 @@
 class PaymentMailer < ApplicationMailer
-  default from: "no-reply@yourapp.com"
+  default from: "no-reply@rentpilot.pro"
 
   def overdue_payment_email(payment)
     @payment = payment
