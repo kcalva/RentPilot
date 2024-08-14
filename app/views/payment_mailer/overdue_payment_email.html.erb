@@ -1,0 +1,8 @@
+<p>Dear <%= @tenant.name %>,</p>
+
+<p>This is a reminder that your payment of <%= number_to_currency(@payment.amount) %> due on <%= @payment.due_date.strftime("%B %d, %Y") %> is now overdue.</p>
+
+<p>Please make the payment as soon as possible to avoid further penalties.</p>
+
+<p>Thank you,</p>
+<p>RentPilot Team</p>

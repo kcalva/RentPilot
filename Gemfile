@@ -45,6 +45,8 @@ gem "bootsnap", require: false
 gem "rails_admin", "~> 3.0"
 gem "sassc-rails"
 
+gem "postmark-rails"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -95,6 +97,7 @@ group :development do
   gem "rails-erd"
   gem "rufo"
   gem "specs_to_readme"
+  gem "letter_opener"
 end
 
 group :development, :test do
@@ -106,3 +109,5 @@ group :test do
   gem "rspec-html-matchers"
   gem "webmock"
 end
+
+gem "good_job", "~> 4.1"
