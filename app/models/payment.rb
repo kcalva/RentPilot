@@ -23,4 +23,14 @@ class Payment < ApplicationRecord
   belongs_to :unit
 
   has_one :property, through: :unit, source: :property
+
+  after_save :check_overdue_status
+
+  private
+
+  def check_overdue_status
+    if saved_change_to_status? && status == "overdue"
+      OverduePaymentNotificationJob.perform_later(id)
+    end
+  end
 end
