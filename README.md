@@ -142,6 +142,5 @@ Run `bundle install` if you encounter issues with missing gems or packages.
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
-
-Kevin Calva - [kcalva737@gmail.com](mailto:kcalva737@gmail.com)
-Project Link: [https://github.com/users/kcalva/projects/1](https://github.com/users/kcalva/projects/1)
+* Kevin Calva - [kcalva737@gmail.com](mailto:kcalva737@gmail.com)
+* Project Link: [https://github.com/users/kcalva/projects/1](https://github.com/users/kcalva/projects/1)
