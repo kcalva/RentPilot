@@ -109,6 +109,13 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    carrierwave (3.0.7)
+      activemodel (>= 6.0.0)
+      activesupport (>= 6.0.0)
+      addressable (~> 2.6)
+      image_processing (~> 1.1)
+      marcel (~> 1.0.0)
+      ssrf_filter (~> 1.0)
     childprocess (5.1.0)
       logger (~> 1.5)
     choice (0.2.0)
@@ -193,6 +200,9 @@ GEM
     http-form_data (2.3.0)
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
+    image_processing (1.13.0)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     importmap-rails (2.0.1)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -239,6 +249,7 @@ GEM
     marcel (1.0.4)
     matrix (0.4.2)
     method_source (1.1.0)
+    mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.23.1)
     msgpack (1.7.2)
@@ -383,6 +394,9 @@ GEM
     rspec-support (3.13.1)
     ruby-graphviz (1.2.5)
       rexml
+    ruby-vips (2.2.2)
+      ffi (~> 1.12)
+      logger
     rubyzip (2.3.2)
     rufo (0.18.0)
     sassc (2.4.0)
@@ -400,6 +414,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    shoulda-matchers (4.5.1)
+      activesupport (>= 4.2.0)
     simple_form (5.3.1)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -413,6 +429,7 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.7.3-arm64-darwin)
     sqlite3 (1.7.3-x86_64-linux)
+    ssrf_filter (1.1.2)
     stimulus-rails (1.3.3)
       railties (>= 6.0.0)
     stringio (3.1.0)
@@ -472,6 +489,7 @@ DEPENDENCIES
   binding_of_caller
   bootsnap
   capybara
+  carrierwave
   debug
   devise
   dotenv-rails
@@ -499,6 +517,7 @@ DEPENDENCIES
   rufo
   sassc-rails
   selenium-webdriver
+  shoulda-matchers (~> 4.0)
   simple_form
   specs_to_readme
   sprockets-rails

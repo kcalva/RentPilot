@@ -15,6 +15,4 @@ Rails.application.routes.draw do
     resources :leases, except: [:show]
     resources :payments, except: [:show]
   end
-
-  # resources :messages
 end
