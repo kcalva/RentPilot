@@ -85,6 +85,7 @@ gem "http"
 gem "simple_form"
 gem "sqlite3", "~> 1.4"
 gem "table_print"
+gem "carrierwave"
 
 group :development do
   gem "annotate"
@@ -106,6 +107,7 @@ end
 
 group :test do
   gem "draft_matchers"
+  gem "shoulda-matchers", "~> 4.0"
   gem "rspec-html-matchers"
   gem "webmock"
 end
