@@ -26,6 +26,10 @@ class Payment < ApplicationRecord
 
   after_save :check_overdue_status
 
+  scope :overdue, -> { where(status: "overdue") }
+  scope :pending, -> { where(status: "pending") }
+  scope :paid, -> { where(status: "paid") }
+
   private
 
   def check_overdue_status

@@ -97,8 +97,6 @@ GEM
     bindex (0.8.1)
     binding_of_caller (1.0.1)
       debug_inspector (>= 1.2.0)
-    bootsnap (1.18.3)
-      msgpack (~> 1.2)
     builder (3.2.4)
     capybara (3.40.0)
       addressable
@@ -252,7 +250,6 @@ GEM
     mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.23.1)
-    msgpack (1.7.2)
     mutex_m (0.2.0)
     nested_form (0.3.2)
     net-http (0.4.1)
@@ -358,7 +355,6 @@ GEM
       i18n
     rdoc (6.7.0)
       psych (>= 4.0.0)
-    redis (4.8.1)
     regexp_parser (2.9.2)
     reline (0.5.8)
       io-console (~> 0.5)
@@ -487,7 +483,6 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
-  bootsnap
   capybara
   carrierwave
   debug
@@ -511,7 +506,6 @@ DEPENDENCIES
   rails-erd
   rails_admin (~> 3.0)
   rails_db
-  redis (~> 4.0)
   rspec-html-matchers
   rspec-rails (~> 6.0.0)
   rufo
