@@ -5,6 +5,7 @@ class LeasesController < ApplicationController
   # GET /leases
   def index
     @tenant = User.find(params[:user_id])
+    # lines 9 & 10 would be better in a model than in a controller
     @current_lease = @tenant.leases.where("start_date <= ? AND end_date >= ?", Date.today, Date.today).first
     @past_leases = @tenant.leases.where("end_date < ?", Date.today)
   end
