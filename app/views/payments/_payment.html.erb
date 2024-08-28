@@ -7,7 +7,7 @@
   <% if current_user.landlord? %>
     <%= render 'shared/actions', edit_path: edit_user_payment_path(payment.tenant, payment), delete_path: user_payment_path(payment.tenant, payment) %>
   <% end %>
-
+  <!-- if it's not implemented yet, it should be on a branch rather than on main -->
   <!-- This will be added for future feature -->
   <%# if payment.status == 'pending' %>
   <%#= link_to 'Pay Now', edit_user_payment_path(@user, payment), class: 'btn btn-primary btn-sm' %>

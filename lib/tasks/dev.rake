@@ -3,7 +3,9 @@ namespace :dev do
   task sample_data: [:environment] do
     starting = Time.now
     p "Clearing old data..."
-    Message.delete_all
+    # Are you using a message model? It doesn't exist in the /models folder but it does exist in the schema.
+    # Calling on `Message` in this file throws errors as a result, so for now we've commented them out to make the task work.
+    # Message.delete_all
     Payment.delete_all
     Lease.delete_all
     Unit.delete_all
@@ -119,14 +121,14 @@ namespace :dev do
       end
     end
 
-    p "Seeding messages..."
-    50.times do
-      Message.create!(
-        sender: tenants.sample,
-        receiver: landlords.sample,
-        content: Faker::Lorem.sentence,
-      )
-    end
+    # p "Seeding messages..."
+    # 50.times do
+    #   Message.create!(
+    #     sender: tenants.sample,
+    #     receiver: landlords.sample,
+    #     content: Faker::Lorem.sentence,
+    #   )
+    # end
 
     ending = Time.now
 
@@ -136,6 +138,6 @@ namespace :dev do
     p "There are now #{Unit.count} units."
     p "There are now #{Lease.count} leases."
     p "There are now #{Payment.count} payments."
-    p "There are now #{Message.count} messages."
+    # p "There are now #{Message.count} messages."
   end
 end

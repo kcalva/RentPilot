@@ -10,6 +10,7 @@ class PaymentsController < ApplicationController
     else
       @payments = Payment.all.includes(:tenant, :unit)
     end
+    # Defining the overdue, pending, and paid payments should happen in the model, then be ordered here
     @overdue_payments = @payments.where(status: "overdue").order(due_date: :desc)
     @pending_payments = @payments.where(status: "pending").order(due_date: :desc)
     @paid_payments = @payments.where(status: "paid").order(due_date: :desc)
